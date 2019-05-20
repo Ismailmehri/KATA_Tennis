@@ -42,6 +42,19 @@ public class ScoreCalculatorTest {
 		player1.winPoint();
 		player2.winPoint();
 		player2.winPoint();
+		
+		//Then
+		assertThat(calculator.getTheWinner(), equalTo(player1.getName()));
+	}
+	
+	public void should_return_empty_string_DEUCE() {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
 		player2.winPoint();
 		
 		//Then
@@ -58,9 +71,106 @@ public class ScoreCalculatorTest {
 		player1.winPoint();
 		player2.winPoint();
 		player2.winPoint();
-		player2.winPoint();
 		
 		//Then
 		assertThat(calculator.gameHasEnded(), equalTo(true));
+	}
+	
+	@Test
+	public void should_return_game_ended_DEUCE() {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		
+		player1.winPoint();
+		player1.winPoint();
+		
+		//Then
+		assertThat(calculator.gameHasEnded(), equalTo(true));
+	}
+	
+	@Test
+	public void should_return_game_not_ended() {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		
+		//Then
+		assertThat(calculator.gameHasEnded(), equalTo(false));
+	}
+	
+	@Test
+	public void should_isAdvanced_return_true () {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		
+		player1.winPoint();
+		player2.winPoint();
+		player1.winPoint();
+		
+		//Then
+		assertThat(calculator.isAdvantage(), equalTo(true));
+		
+	}
+	
+	@Test
+	public void should_isAdvanced_return_false () {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		
+		//Then
+		assertThat(calculator.isAdvantage(), equalTo(false));
+		
+	}
+	
+	@Test
+	public void should_isDeuce_return_true () {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		
+		//Then
+		assertThat(calculator.isAdvantage(), equalTo(true));
+		
+	}
+	
+	@Test
+	public void should_isDeuce_return_false() {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		
+		//Then
+		assertThat(calculator.isAdvantage(), equalTo(false));
+		
 	}
 }

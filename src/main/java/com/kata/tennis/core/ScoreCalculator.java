@@ -34,4 +34,20 @@ public class ScoreCalculator {
 		return gameHasEnded() ? 
 				player1.compareTo(player2) > 0 ? player1.getName() : player2.getName() : "";
 	}
+	
+	/**
+	 * return true if is advantage
+	 * @return 
+	 */
+	public boolean isAdvantage() {
+		return true;
+	}
+	
+	/**
+	 * return true if is deuce
+	 * @return
+	 */
+	public boolean isDeuce() {
+		return true;
+	}
 }
