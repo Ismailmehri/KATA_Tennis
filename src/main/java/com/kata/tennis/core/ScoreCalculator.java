@@ -23,7 +23,8 @@ public class ScoreCalculator {
 	 * @return {@link Boolean}
 	 */
 	public boolean gameHasEnded() {
-		return player1.getScore().getCurrentScore() > 3 || player2.getScore().getCurrentScore() > 3;
+		return (player1.getScore().getCurrentScore() > 3 && player1.getScore().getCurrentScore() - player2.getScore().getCurrentScore() > 1) || 
+				(player2.getScore().getCurrentScore() > 3 && player2.getScore().getCurrentScore() - player1.getScore().getCurrentScore() > 1);
 	}
 	
 	/**
@@ -40,7 +41,8 @@ public class ScoreCalculator {
 	 * @return 
 	 */
 	public boolean isAdvantage() {
-		return true;
+		return player1.getScore().getCurrentScore() >= 3 && player2.getScore().getCurrentScore() >= 3
+				&& player1.getScore().getCurrentScore() != player2.getScore().getCurrentScore();
 	}
 	
 	/**
@@ -48,6 +50,7 @@ public class ScoreCalculator {
 	 * @return
 	 */
 	public boolean isDeuce() {
-		return true;
+		return player1.getScore().getCurrentScore() >= 3 && player2.getScore().getCurrentScore() >= 3
+				&& player1.getScore().getCurrentScore() == player2.getScore().getCurrentScore();
 	}
 }

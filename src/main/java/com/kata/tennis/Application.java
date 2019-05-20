@@ -16,7 +16,7 @@ public class Application {
 		ScoreCalculator scoreCalculator = new ScoreCalculator(p1, p2);
 		Scanner scan = new Scanner(System.in);
         
-        
+		help();
         while(!scoreCalculator.gameHasEnded()) {
         	int input = scan.nextInt();
         	switch (input) {
@@ -32,7 +32,6 @@ public class Application {
         	}
         }
         scan.close();
-        printCurrentScore(p1, p2);
 		System.out.println("The winner is " + scoreCalculator.getTheWinner());
 		end();
 
@@ -41,10 +40,10 @@ public class Application {
 	private static void printCurrentScore(Player player1, Player player2) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("| ----- Player 1 :");
-		sb.append(player1.getScore().getTennisScore());
+		sb.append(player1.getScore().getCurrentScore());
 		sb.append(" | ");
 		sb.append("Player 2 :");
-		sb.append(player2.getScore().getTennisScore());
+		sb.append(player2.getScore().getCurrentScore());
 		sb.append(" ----- |");
 		System.out.println(sb.toString());
 	}
@@ -62,6 +61,14 @@ public class Application {
 	}
 	
 	private static void playerWin(String name) {
-		System.out.println(" --> " + name + " win !");
+		System.out.println(" --> " + name + " wins 1 point !");
+	}
+	
+	private static void help() {
+		System.out.println(" Push '0' to display the current Game score ");
+		System.out.println(" Push '1' if you want that the player 1 win point ");
+		System.out.println(" Push '2' if you want that the player 2 win point ");
+
+
 	}
 }

@@ -33,18 +33,4 @@ public class ScoreTest {
 		assertThat(score.getCurrentScore(), equalTo(1));
 
 	}
-	
-	@Test
-	public void score_should_return_tennis_score() {
-		
-		//Given
-		score = new Score();
-		
-		// When
-		score.incrementScore();
-		
-		//then
-		assertThat(score.getTennisScore(), equalTo("15"));
-
-	}
 }

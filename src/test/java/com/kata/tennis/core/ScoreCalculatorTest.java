@@ -157,7 +157,7 @@ public class ScoreCalculatorTest {
 		player2.winPoint();
 		
 		//Then
-		assertThat(calculator.isAdvantage(), equalTo(true));
+		assertThat(calculator.isDeuce(), equalTo(true));
 		
 	}
 	
@@ -170,7 +170,7 @@ public class ScoreCalculatorTest {
 		player2.winPoint();
 		
 		//Then
-		assertThat(calculator.isAdvantage(), equalTo(false));
+		assertThat(calculator.isDeuce(), equalTo(false));
 		
 	}
 }
