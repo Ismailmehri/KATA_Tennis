@@ -5,7 +5,7 @@ package com.kata.tennis.domain;
  * 
  * @author mehri
  */
-public class Player {
+public class Player implements Comparable<Player> {
 
     /**
      * Player name
@@ -51,5 +51,12 @@ public class Player {
 	 */
 	public void winPoint() {
 		this.score.incrementScore();
+	}
+
+	/**
+	 * Compare two Players
+	 */
+	public int compareTo(Player player) {
+		return this.score.getCurrentScore() - player.getScore().getCurrentScore();
 	}
 }

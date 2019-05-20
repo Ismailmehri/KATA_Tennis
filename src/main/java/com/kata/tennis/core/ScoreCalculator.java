@@ -23,7 +23,7 @@ public class ScoreCalculator {
 	 * @return {@link Boolean}
 	 */
 	public boolean gameHasEnded() {
-		return true;
+		return player1.getScore().getCurrentScore() > 3 || player2.getScore().getCurrentScore() > 3;
 	}
 	
 	/**
@@ -31,6 +31,7 @@ public class ScoreCalculator {
 	 * @return {@link String} 
 	 */
 	public String getTheWinner() {
-		return "";
+		return gameHasEnded() ? 
+				player1.compareTo(player2) > 0 ? player1.getName() : player2.getName() : "";
 	}
 }

@@ -39,6 +39,9 @@ public class ScoreCalculatorTest {
 		player1.winPoint();
 		player1.winPoint();
 		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
 		player2.winPoint();
 		
 		//Then
@@ -47,6 +50,17 @@ public class ScoreCalculatorTest {
 	
 	@Test
 	public void should_return_game_ended() {
+		
+		// When
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		
+		//Then
 		assertThat(calculator.gameHasEnded(), equalTo(true));
 	}
 }
