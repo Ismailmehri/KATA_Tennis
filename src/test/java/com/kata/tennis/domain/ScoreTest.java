@@ -22,6 +22,11 @@ public class ScoreTest {
 	}
 	
 	@Test
+	public void set_score_should_start_with_zero() {
+		assertThat(score.getSetScore(), equalTo(0));
+	}
+	
+	@Test
 	public void score_should_be_incremented() {
 		//Given
 		assertThat(score.getCurrentScore(), equalTo(0));

@@ -14,10 +14,16 @@ public class Score {
 	public static final String GAME_SCORE_40 = "40";
 	public static final String GAME_SCORE_ADV = "ADV";
 	public static final String GAME_SCORE_DEUCE = "DEUCE";
-    /**
+    
+	/**
      * Player current score
      */
     private int currentScore;
+    
+    /**
+     * player set score
+     */
+    private int setScore;
     
     /**
      * the game score
@@ -30,6 +36,7 @@ public class Score {
     public Score() {
     	this.currentScore = 0;
     	this.gameScore = GAME_SCORE_0;
+    	this.setScore = 0;
     }
     
     /**
@@ -62,6 +69,21 @@ public class Score {
 	 */
 	public void setGameScore(String gameScore) {
 		this.gameScore = gameScore;
+	}
+
+	/**
+	 * Return the set score
+	 * @return
+	 */
+	public int getSetScore() {
+		return setScore;
+	}
+
+	/**
+	 * increment the set score
+	 */
+	public void incrementSetScore() {
+		this.setScore++;
 	}
     
 }

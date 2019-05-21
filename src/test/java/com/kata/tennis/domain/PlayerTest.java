@@ -24,6 +24,11 @@ public class PlayerTest {
     }
     
     @Test
+    public void player_should_start_with_set_score_of_0(){
+        assertThat( player.getScore().getSetScore(), equalTo(0));
+    }
+    
+    @Test
     public void should_increment_score_if_player_won() {
     	
     	//When
