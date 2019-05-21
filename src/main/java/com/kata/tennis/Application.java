@@ -12,6 +12,7 @@ public class Application {
 
 		Player p1 = new Player("Player 1");
 		Player p2 = new Player("Player 2");
+		boolean tieBreakActivated = false;
 
 		start();
 		ScoreCalculator scoreCalculator = new ScoreCalculator(p1, p2);
@@ -20,21 +21,41 @@ public class Application {
         
 		help();
 		while (!setScoreCalculator.gameHasEnded()) {
-	        while(!scoreCalculator.gameHasEnded()) {
+	        while(setScoreCalculator.isTieBreak() || (!scoreCalculator.gameHasEnded() && !tieBreakActivated)) {
 	        	int input = scan.nextInt();
 	        	switch (input) {
 	        		case 0 : printCurrentScore(p1, p2, scoreCalculator);
 	        			break;
-	        		case 1 : p1.winPoint();
+	        		case 1 : if (!setScoreCalculator.isTieBreak()) {
+	        					p1.winPoint();
+	        				} else {
+				        		p1.incrementTieBreak();
+				        		tieBreakActivated = true;
+				        		if (setScoreCalculator.isTieBreakEnded()) {
+				        			p1.winSet();
+				        		}
+				        		printCurrentScore(p1, p2, scoreCalculator);
+				        	}
 	        			playerWin(p1.getName());
 	        			break;
-	        		case 2 : p2.winPoint();
+	        		case 2 : if (!setScoreCalculator.isTieBreak()) {
+		    					p2.winPoint();
+		    				} else {
+				        		p2.incrementTieBreak();
+				        		tieBreakActivated = true;
+				        		if (setScoreCalculator.isTieBreakEnded()) {
+				        			p2.winSet();
+				        		}
+				        		printCurrentScore(p1, p2, scoreCalculator);
+				        	}
 	    				playerWin(p2.getName());
 	        			break;
 	        		default : System.out.println("Incorrect value");
 	        	}
 	        }
-	        scoreCalculator.getTheWinner().winSet();
+	        if (!setScoreCalculator.isTieBreak() && !tieBreakActivated) {
+		        scoreCalculator.getTheWinner().winSet();
+	        }
 	        p1.getScore().initCurrentScore();
 	        p2.getScore().initCurrentScore();
 	        printCurrentScore(p1, p2, scoreCalculator);
@@ -51,12 +72,16 @@ public class Application {
 		sb.append(player1.getScore().getGameScore());
 		sb.append(" | ");
 		sb.append(player1.getScore().getSetScore());
+		sb.append(" | ");
+		sb.append(player1.getScore().getTieBreak());
 		sb.append(" ----- |");
 		sb.append("\n");
 		sb.append("| ----- Player 2 :  ");
 		sb.append(player2.getScore().getGameScore());
 		sb.append(" | ");
 		sb.append(player2.getScore().getSetScore());
+		sb.append(" | ");
+		sb.append(player2.getScore().getTieBreak());
 		sb.append(" ----- |");
 		System.out.println(sb.toString());
 	}
@@ -83,7 +108,5 @@ public class Application {
 		System.out.println(" Push '0' to display the current Game score ");
 		System.out.println(" Push '1' if you want that the player 1 win point ");
 		System.out.println(" Push '2' if you want that the player 2 win point ");
-
-
 	}
 }

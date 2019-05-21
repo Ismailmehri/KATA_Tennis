@@ -269,7 +269,7 @@ public class SetScoreCalculatorTest {
 		
 		
 		// Then
-		assertThat(calculator.isTieBreakEnded(), equalTo(true));
+		assertThat(calculator.isTieBreakEnded(), equalTo(false));
 	}
 	
 	@Test

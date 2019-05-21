@@ -24,7 +24,8 @@ public class SetScoreCalculator {
 	public boolean gameHasEnded() {
 		return (player1.getScore().getSetScore() == 7 || player2.getScore().getSetScore() == 7) 
 				|| (player1.getScore().getSetScore() == 6 && player2.getScore().getSetScore() <= 4)
-				|| (player2.getScore().getSetScore() == 6 && player1.getScore().getSetScore() <= 4);
+				|| (player2.getScore().getSetScore() == 6 && player1.getScore().getSetScore() <= 4)
+				|| (isTieBreak() && isTieBreakEnded());
 	}
 	
 	/**
@@ -41,7 +42,7 @@ public class SetScoreCalculator {
 	 * @return
 	 */
 	public boolean isTieBreak() {
-		return false;
+		return player1.getScore().getSetScore() == 6 && player2.getScore().getSetScore() == 6;
 	}
 
 	/**
@@ -49,6 +50,8 @@ public class SetScoreCalculator {
 	 * @return {@link Boolean}
 	 */
 	public boolean isTieBreakEnded() {
-		return false;
+		return isTieBreak() ? ((player1.getScore().getTieBreak() > 6 
+				|| player2.getScore().getTieBreak() > 6) 
+				&& Math.abs(player1.getScore().getTieBreak() - player2.getScore().getTieBreak()) > 1) : false;
 	}
 }
