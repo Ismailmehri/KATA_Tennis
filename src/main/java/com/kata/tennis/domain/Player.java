@@ -45,7 +45,7 @@ public class Player implements Comparable<Player> {
 	public Score getScore() {
 		return score;
 	}
-
+	
 	/**
 	 * increment player score
 	 */
@@ -61,7 +61,7 @@ public class Player implements Comparable<Player> {
 	}
 
 	/**
-	 * Compare two Players
+	 * Compare the game score of two players
 	 */
 	public int compareTo(Player player) {
 		return this.score.getCurrentScore() - player.getScore().getCurrentScore();

@@ -72,6 +72,13 @@ public class Score {
 	}
 
 	/**
+	 * Initialize the current score
+	 */
+	public void initCurrentScore() {
+		currentScore = 0;
+	}
+	
+	/**
 	 * Return the set score
 	 * @return
 	 */

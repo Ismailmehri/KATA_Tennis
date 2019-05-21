@@ -3,7 +3,11 @@ package com.kata.tennis.core;
 import com.kata.tennis.domain.Player;
 import com.kata.tennis.domain.Score;
 
-
+/**
+ * Score calculator class
+ * @author mehri
+ *
+ */
 public class ScoreCalculator {
 
 	private Player player1;
@@ -30,11 +34,10 @@ public class ScoreCalculator {
 	
 	/**
 	 * The function return name of winner if the game is ended
-	 * @return {@link String} 
+	 * @return {@link Player} or {@code <code>null</code>} if the game does not ended 
 	 */
-	public String getTheWinner() {
-		return gameHasEnded() ? 
-				player1.compareTo(player2) > 0 ? player1.getName() : player2.getName() : "";
+	public Player getTheWinner() {
+		return gameHasEnded() ? player1.compareTo(player2) > 0 ? player1 : player2 : null;
 	}
 	
 	/**

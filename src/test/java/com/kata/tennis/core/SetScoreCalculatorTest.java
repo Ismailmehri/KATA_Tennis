@@ -29,7 +29,7 @@ public class SetScoreCalculatorTest {
 		player2.winSet();
 		
 		// When
-		boolean gameHasEnded = calculator.hasGameEnded();
+		boolean gameHasEnded = calculator.gameHasEnded();
 		
 		// Then
 		assertThat(gameHasEnded, equalTo(false));
@@ -53,7 +53,7 @@ public class SetScoreCalculatorTest {
 		player2.winSet();
 		
 		// When
-		boolean gameHasEnded = calculator.hasGameEnded();
+		boolean gameHasEnded = calculator.gameHasEnded();
 		
 		// Then
 		assertThat(gameHasEnded, equalTo(false));
@@ -80,7 +80,7 @@ public class SetScoreCalculatorTest {
 
 		
 		// When
-		boolean gameHasEnded = calculator.hasGameEnded();
+		boolean gameHasEnded = calculator.gameHasEnded();
 		
 		// Then
 		assertThat(gameHasEnded, equalTo(true));
@@ -101,7 +101,7 @@ public class SetScoreCalculatorTest {
 		
 		
 		// When
-		boolean gameHasEnded = calculator.hasGameEnded();
+		boolean gameHasEnded = calculator.gameHasEnded();
 		
 		// Then
 		assertThat(gameHasEnded, equalTo(true));
@@ -122,10 +122,10 @@ public class SetScoreCalculatorTest {
 		
 		
 		// When
-		String name = calculator.getTheWinner();
+		Player player = calculator.getTheWinner();
 		
 		// Then
-		assertThat(name, equalTo(player1.getName()));
+		assertThat(player, equalTo(player1));
 	}
 	
 	public void should_return_player_2_name() {
@@ -148,9 +148,9 @@ public class SetScoreCalculatorTest {
 
 		
 		// When
-		String name = calculator.getTheWinner();
+		Player name = calculator.getTheWinner();
 		
 		// Then
-		assertThat(name, equalTo(player2.getName()));
+		assertThat(name, equalTo(player2));
 	}
 }

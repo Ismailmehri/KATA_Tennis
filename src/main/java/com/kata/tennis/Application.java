@@ -3,6 +3,7 @@ package com.kata.tennis;
 import java.util.Scanner;
 
 import com.kata.tennis.core.ScoreCalculator;
+import com.kata.tennis.core.SetScoreCalculator;
 import com.kata.tennis.domain.Player;
 
 public class Application {
@@ -14,26 +15,32 @@ public class Application {
 
 		start();
 		ScoreCalculator scoreCalculator = new ScoreCalculator(p1, p2);
+		SetScoreCalculator setScoreCalculator = new SetScoreCalculator(p1, p2);
 		Scanner scan = new Scanner(System.in);
         
 		help();
-        while(!scoreCalculator.gameHasEnded()) {
-        	int input = scan.nextInt();
-        	switch (input) {
-        		case 0 : printCurrentScore(p1, p2, scoreCalculator);
-        			break;
-        		case 1 : p1.winPoint();
-        			playerWin(p1.getName());
-        			break;
-        		case 2 : p2.winPoint();
-    				playerWin(p2.getName());
-        			break;
-        		default : System.out.println("Incorrect value");
-        	}
+		while (!setScoreCalculator.gameHasEnded()) {
+	        while(!scoreCalculator.gameHasEnded()) {
+	        	int input = scan.nextInt();
+	        	switch (input) {
+	        		case 0 : printCurrentScore(p1, p2, scoreCalculator);
+	        			break;
+	        		case 1 : p1.winPoint();
+	        			playerWin(p1.getName());
+	        			break;
+	        		case 2 : p2.winPoint();
+	    				playerWin(p2.getName());
+	        			break;
+	        		default : System.out.println("Incorrect value");
+	        	}
+	        }
+	        scoreCalculator.getTheWinner().winSet();
+	        p1.getScore().initCurrentScore();
+	        p2.getScore().initCurrentScore();
+	        printCurrentScore(p1, p2, scoreCalculator);
         }
         scan.close();
-		System.out.println(" |----- The winner is " + scoreCalculator.getTheWinner() + "  -----|");
-		end();
+		end(setScoreCalculator.getTheWinner().getName());
 
 	}
 
@@ -42,10 +49,14 @@ public class Application {
 		StringBuilder sb = new StringBuilder();
 		sb.append("| ----- Player 1 :  ");
 		sb.append(player1.getScore().getGameScore());
+		sb.append(" | ");
+		sb.append(player1.getScore().getSetScore());
 		sb.append(" ----- |");
 		sb.append("\n");
 		sb.append("| ----- Player 2 :  ");
 		sb.append(player2.getScore().getGameScore());
+		sb.append(" | ");
+		sb.append(player2.getScore().getSetScore());
 		sb.append(" ----- |");
 		System.out.println(sb.toString());
 	}
@@ -56,9 +67,11 @@ public class Application {
 		System.out.println("----------------------------------------------------------------");
 	}
 	
-	private static void end() {
+	private static void end(String palyer) {
 		System.out.println("----------------------------------------------------------------");
-		System.out.println("|                          Game Over                            ");
+		System.out.println("|                      The winner is " + palyer + "                    |");
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("|                          Game Over                           |");
 		System.out.println("----------------------------------------------------------------");
 	}
 	

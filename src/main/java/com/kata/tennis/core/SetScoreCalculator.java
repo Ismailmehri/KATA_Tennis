@@ -1,7 +1,5 @@
 package com.kata.tennis.core;
 
-import java.lang.reflect.Constructor;
-
 import com.kata.tennis.domain.Player;
 
 public class SetScoreCalculator {
@@ -23,11 +21,18 @@ public class SetScoreCalculator {
 	 * return true if the game is ended
 	 * @return
 	 */
-	public boolean hasGameEnded() {
-		return true;
+	public boolean gameHasEnded() {
+		return (player1.getScore().getSetScore() == 7 || player2.getScore().getSetScore() == 7) 
+				|| (player1.getScore().getSetScore() == 6 && player2.getScore().getSetScore() <= 4)
+				|| (player2.getScore().getSetScore() == 6 && player1.getScore().getSetScore() <= 4);
 	}
 	
-	public String getTheWinner() {
-		return "";
+	/**
+	 * return the winner
+	 * @return {@link Player} or {@code <code>null</code>} if the game does not ended
+	 */
+	public Player getTheWinner() {
+		return gameHasEnded() ? player1.getScore().getSetScore() > player2.getScore().getSetScore() 
+				? player1 : player2 : null;
 	}
 }

@@ -30,7 +30,7 @@ public class ScoreCalculatorTest {
 	
 	@Test
 	public void should_return_empty_string() {
-		assertThat(calculator.getTheWinner(), equalTo(""));
+		assertThat(calculator.getTheWinner(), equalTo(null));
 	}
 	
 	@Test
@@ -45,7 +45,7 @@ public class ScoreCalculatorTest {
 		player2.winPoint();
 		
 		//Then
-		assertThat(calculator.getTheWinner(), equalTo(player1.getName()));
+		assertThat(calculator.getTheWinner(), equalTo(player1));
 	}
 	
 	public void should_return_empty_string_DEUCE() {
@@ -59,7 +59,7 @@ public class ScoreCalculatorTest {
 		player2.winPoint();
 		
 		//Then
-		assertThat(calculator.getTheWinner(), equalTo(player1.getName()));
+		assertThat(calculator.getTheWinner(), equalTo(player1));
 	}
 	
 	@Test
