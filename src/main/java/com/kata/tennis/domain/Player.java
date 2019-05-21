@@ -59,6 +59,13 @@ public class Player implements Comparable<Player> {
 	public void winSet() {
 		this.score.incrementSetScore();
 	}
+	
+	/**
+	 * Increment tie-break
+	 */
+	public void incrementTieBreak() {
+		this.score.incrementTieBreak();
+	}
 
 	/**
 	 * Compare the game score of two players

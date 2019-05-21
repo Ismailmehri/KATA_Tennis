@@ -26,6 +26,11 @@ public class Score {
     private int setScore;
     
     /**
+     * Tie-Break score
+     */
+    private int tieBreak;
+    
+    /**
      * the game score
      */
     private String gameScore;
@@ -37,6 +42,7 @@ public class Score {
     	this.currentScore = 0;
     	this.gameScore = GAME_SCORE_0;
     	this.setScore = 0;
+    	this.tieBreak = 0;
     }
     
     /**
@@ -92,5 +98,21 @@ public class Score {
 	public void incrementSetScore() {
 		this.setScore++;
 	}
+
+	/**
+	 * return the tieBreak
+	 * @return the tie-break value
+	 */
+	public int getTieBreak() {
+		return tieBreak;
+	}
+
+	/**
+	 * increment tieBreak
+	 */
+	public void incrementTieBreak() {
+		this.tieBreak++;
+	}
     
+	
 }

@@ -68,7 +68,6 @@ public class SetScoreCalculatorTest {
 		player1.winSet();
 		player1.winSet();
 		player1.winSet();
-		player1.winSet();
 		
 		player2.winSet();
 		player2.winSet();
@@ -108,6 +107,45 @@ public class SetScoreCalculatorTest {
 	}
 	
 	@Test
+	public void should_return_gamehasended_true_tieBreak_activated() {
+		
+		// Given
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		
+		
+		// When
+		boolean gameHasEnded = calculator.gameHasEnded();
+		
+		// Then
+		assertThat(gameHasEnded, equalTo(true));
+	}
+	
+	@Test
 	public void should_return_player_1_name() {
 		
 		// Given
@@ -136,7 +174,6 @@ public class SetScoreCalculatorTest {
 		player1.winSet();
 		player1.winSet();
 		player1.winSet();
-		player1.winSet();
 		
 		player2.winSet();
 		player2.winSet();
@@ -152,5 +189,127 @@ public class SetScoreCalculatorTest {
 		
 		// Then
 		assertThat(name, equalTo(player2));
+	}
+	
+	public void should_return_player_2_name_tieBreak_activated() {
+		
+		// Given
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		
+		// When
+		Player name = calculator.getTheWinner();
+		
+		// Then
+		assertThat(name, equalTo(player2));
+	}
+	
+	@Test
+	public void should_isTieBreak_return_true() {
+		
+
+		// Given
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		player1.winSet();
+		
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		player2.winSet();
+		
+		// Then
+		assertThat(calculator.isTieBreak(), equalTo(true));
+		
+	}
+	
+	@Test
+	public void should_isTieBreakEnded_return_true() {
+		
+
+		// Given
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+
+		player2.incrementTieBreak();
+		
+		
+		// Then
+		assertThat(calculator.isTieBreakEnded(), equalTo(true));
+	}
+	
+	@Test
+	public void should_isTieBreakEnded_return_false_less_than_7() {
+
+		// Given
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+
+		player2.incrementTieBreak();
+		
+		
+		// Then
+		assertThat(calculator.isTieBreakEnded(), equalTo(false));
+	}
+	
+	public void should_isTieBreakEnded_return_false() {
+
+		// Given
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+		player1.incrementTieBreak();
+
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+		player2.incrementTieBreak();
+
+		
+		// Then
+		assertThat(calculator.isTieBreakEnded(), equalTo(false));
 	}
 }

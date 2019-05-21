@@ -35,4 +35,20 @@ public class SetScoreCalculator {
 		return gameHasEnded() ? player1.getScore().getSetScore() > player2.getScore().getSetScore() 
 				? player1 : player2 : null;
 	}
+
+	/**
+	 * Return true if set score 6 - 6
+	 * @return
+	 */
+	public boolean isTieBreak() {
+		return false;
+	}
+
+	/**
+	 * return true if Tie-Break is ended;
+	 * @return {@link Boolean}
+	 */
+	public boolean isTieBreakEnded() {
+		return false;
+	}
 }
