@@ -20,7 +20,7 @@ public class Application {
         while(!scoreCalculator.gameHasEnded()) {
         	int input = scan.nextInt();
         	switch (input) {
-        		case 0 : printCurrentScore(p1, p2);
+        		case 0 : printCurrentScore(p1, p2, scoreCalculator);
         			break;
         		case 1 : p1.winPoint();
         			playerWin(p1.getName());
@@ -32,18 +32,20 @@ public class Application {
         	}
         }
         scan.close();
-		System.out.println("The winner is " + scoreCalculator.getTheWinner());
+		System.out.println(" |----- The winner is " + scoreCalculator.getTheWinner() + "  -----|");
 		end();
 
 	}
 
-	private static void printCurrentScore(Player player1, Player player2) {
+	private static void printCurrentScore(Player player1, Player player2, ScoreCalculator calculator) {
+		calculator.updateGameScore();
 		StringBuilder sb = new StringBuilder();
-		sb.append("| ----- Player 1 :");
-		sb.append(player1.getScore().getCurrentScore());
-		sb.append(" | ");
-		sb.append("Player 2 :");
-		sb.append(player2.getScore().getCurrentScore());
+		sb.append("| ----- Player 1 :  ");
+		sb.append(player1.getScore().getGameScore());
+		sb.append(" ----- |");
+		sb.append("\n");
+		sb.append("| ----- Player 2 :  ");
+		sb.append(player2.getScore().getGameScore());
 		sb.append(" ----- |");
 		System.out.println(sb.toString());
 	}

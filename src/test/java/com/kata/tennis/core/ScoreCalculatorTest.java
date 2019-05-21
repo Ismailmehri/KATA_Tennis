@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.kata.tennis.core.ScoreCalculator;
 import com.kata.tennis.domain.Player;
+import com.kata.tennis.domain.Score;
 
 public class ScoreCalculatorTest {
 
@@ -172,5 +173,69 @@ public class ScoreCalculatorTest {
 		//Then
 		assertThat(calculator.isDeuce(), equalTo(false));
 		
+	}
+	
+	@Test
+	public void should_update_game_score() {
+		
+		// Given
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		
+		// When
+		calculator.updateGameScore();
+		
+		// Then
+		assertThat(player1.getScore().getGameScore(), equalTo(Score.GAME_SCORE_30));
+		assertThat(player2.getScore().getGameScore(), equalTo(Score.GAME_SCORE_15));
+
+	}
+	
+	@Test
+	public void should_update_game_score_deuce() {
+		
+		// Given
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		
+		// When
+		calculator.updateGameScore();
+		
+		// Then
+		assertThat(player1.getScore().getGameScore(), equalTo(Score.GAME_SCORE_DEUCE));
+		assertThat(player2.getScore().getGameScore(), equalTo(Score.GAME_SCORE_DEUCE));
+
+	}
+	
+	@Test
+	public void should_update_game_score_adv() {
+		
+		// Given
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		player1.winPoint();
+		
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+		player2.winPoint();
+
+		
+		// When
+		calculator.updateGameScore();
+		
+		// Then
+		assertThat(player1.getScore().getGameScore(), equalTo(Score.GAME_SCORE_40));
+		assertThat(player2.getScore().getGameScore(), equalTo(Score.GAME_SCORE_ADV));
+
 	}
 }

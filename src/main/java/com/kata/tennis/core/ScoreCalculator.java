@@ -1,6 +1,7 @@
 package com.kata.tennis.core;
 
 import com.kata.tennis.domain.Player;
+import com.kata.tennis.domain.Score;
 
 
 public class ScoreCalculator {
@@ -52,5 +53,37 @@ public class ScoreCalculator {
 	public boolean isDeuce() {
 		return player1.getScore().getCurrentScore() >= 3 && player2.getScore().getCurrentScore() >= 3
 				&& player1.getScore().getCurrentScore() == player2.getScore().getCurrentScore();
+	}
+	
+	/**
+	 * update the game score
+	 */
+	public void updateGameScore() {
+		if (!isDeuce() && !isAdvantage()) {
+			player1.getScore().setGameScore(getGameScore(player1));
+			player2.getScore().setGameScore(getGameScore(player2));
+		} else if (isDeuce()) {
+			player1.getScore().setGameScore(Score.GAME_SCORE_DEUCE);
+			player2.getScore().setGameScore(Score.GAME_SCORE_DEUCE);
+		} else {
+			if (player1.compareTo(player2) > 0) {
+				player1.getScore().setGameScore(Score.GAME_SCORE_ADV);
+				player2.getScore().setGameScore(Score.GAME_SCORE_40);
+			} else {
+				player2.getScore().setGameScore(Score.GAME_SCORE_ADV);
+				player1.getScore().setGameScore(Score.GAME_SCORE_40);
+			}
+		}
+	}
+	
+	private String getGameScore(Player player) {
+		
+		switch (player.getScore().getCurrentScore()) {
+			case 0 : return Score.GAME_SCORE_0;
+			case 1 : return Score.GAME_SCORE_15;
+			case 2 : return Score.GAME_SCORE_30;
+			case 3 : return Score.GAME_SCORE_40;
+			default : return "XX";
+		}
 	}
 }
